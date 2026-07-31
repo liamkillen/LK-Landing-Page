@@ -3,11 +3,13 @@
    White ground, black type, yellow frame.
 
    Fonts, and the weights the source actually ships:
-     Libre Franklin            400, 400i, 500, 700, 700i   (body + headings)
+     futura-pt                 400, 400i, 700, 700i        (body - Adobe Fonts)
+     Libre Franklin            400, 400i, 500, 700, 700i   (body fallback + headings)
      Fjalla One                400 only                    (wordmark)
      acumin-pro-extra-condensed 600                        (h2 - Adobe Fonts)
-   Saira Extra Condensed stands in for acumin. Do not ask for a weight
-   that is not in this list - the browser fakes it and the result is mushy.
+   Jost stands in for futura-pt and Saira Extra Condensed for acumin. Do not
+   ask for a weight that is not in this list - the browser fakes it and the
+   result is mushy.
    ============================================================ */
 
 :root {
@@ -16,16 +18,20 @@
   --yellow:   #f5f000;   /* eyedropped approx — single point of change */
   --hairline: #d8d8d8;
   --grey:     #b8b8b8;   /* body copy inside the black hero card */
+  --surround: #2b2b2b;   /* backdrop either side of the page on wide screens */
   --frame-w:  2px;
 
-  /* Real faces from the Squarespace source. acumin-pro-extra-condensed is
-     Adobe Fonts (licensed) — Saira Extra Condensed stands in until a kit
-     is set up; it is the closest free extra-condensed grotesque. */
+  /* Real faces from the Squarespace source. futura-pt and
+     acumin-pro-extra-condensed are Adobe Fonts (licensed) — Jost and Saira
+     Extra Condensed stand in until a kit is set up; they are the closest
+     free geometric / extra-condensed equivalents. Naming the real family
+     first means a licensed kit starts working with no CSS change. */
   --f-display:  "Fjalla One", "Arial Narrow", sans-serif;
-  --f-body:     "Libre Franklin", system-ui, sans-serif;
+  --f-body:     "futura-pt", "Jost", "Libre Franklin", system-ui, sans-serif;
   --f-condensed: "Saira Extra Condensed", "Oswald", "Arial Narrow", sans-serif;
 
-  --wrap: 1200px;
+  --wrap: 1200px;   /* inner content column (rules, sections) */
+  --page: 1400px;   /* outer framed column — the yellow border sits on this */
   --pad:  clamp(1.25rem, 5vw, 2.5rem);
 }
 
@@ -38,7 +44,7 @@ html { -webkit-text-size-adjust: 100%; }
 
 body {
   margin: 0;
-  background: var(--white);
+  background: var(--surround);
   color: var(--black);
   font-family: var(--f-body);
   font-weight: 400;
@@ -59,7 +65,7 @@ a   { color: inherit; }
   padding: .6rem 1rem; letter-spacing: .1em;
 }
 
-/* ---------------- masthead (sits outside the yellow frame) ---------------- */
+/* ---------------- masthead (spans the full framed column) ---------------- */
 
 .masthead {
   display: flex;
@@ -132,10 +138,14 @@ a   { color: inherit; }
 
 /* ---------------- yellow frame ---------------- */
 
-.frame {
-  border-top: var(--frame-w) solid var(--yellow);
-  border-inline: var(--frame-w) solid var(--yellow);
-  border-bottom: var(--frame-w) solid var(--yellow);
+/* The frame wraps the whole page — masthead included — and caps it at
+   --page. Past that width the body's --surround shows either side, which
+   is what the source does on large screens. */
+.page {
+  max-width: var(--page);
+  margin-inline: auto;
+  background: var(--white);
+  border: var(--frame-w) solid var(--yellow);
 }
 
 /* ---------------- shared section shell ---------------- */
