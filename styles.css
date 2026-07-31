@@ -1,8 +1,13 @@
 /* ============================================================
    liamkillen.com — clone of the live Squarespace design
    White ground, black type, yellow frame.
-   Display: Oswald (condensed grotesque)
-   Body:    Jost (geometric sans, Futura-like)
+
+   Fonts, and the weights the source actually ships:
+     Libre Franklin            400, 400i, 500, 700, 700i   (body + headings)
+     Fjalla One                400 only                    (wordmark)
+     acumin-pro-extra-condensed 600                        (h2 - Adobe Fonts)
+   Saira Extra Condensed stands in for acumin. Do not ask for a weight
+   that is not in this list - the browser fakes it and the result is mushy.
    ============================================================ */
 
 :root {
@@ -14,16 +19,20 @@
   --frame-w:  2px;
 
   /* Real faces from the Squarespace source. acumin-pro-extra-condensed is
-     Adobe Fonts (licensed) — Oswald stands in until a kit is set up. */
+     Adobe Fonts (licensed) — Saira Extra Condensed stands in until a kit
+     is set up; it is the closest free extra-condensed grotesque. */
   --f-display:  "Fjalla One", "Arial Narrow", sans-serif;
   --f-body:     "Libre Franklin", system-ui, sans-serif;
-  --f-condensed: "Oswald", "Fjalla One", "Arial Narrow", sans-serif;
+  --f-condensed: "Saira Extra Condensed", "Oswald", "Arial Narrow", sans-serif;
 
   --wrap: 1200px;
   --pad:  clamp(1.25rem, 5vw, 2.5rem);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
+
+/* Missing weights should fail visibly rather than being synthesised. */
+html, body { font-synthesis-weight: none; }
 
 html { -webkit-text-size-adjust: 100%; }
 
@@ -32,7 +41,7 @@ body {
   background: var(--white);
   color: var(--black);
   font-family: var(--f-body);
-  font-weight: 300;
+  font-weight: 400;
   font-size: clamp(1.02rem, 2.6vw, 1.15rem);
   line-height: 1.75;
   letter-spacing: .045em;
@@ -63,7 +72,7 @@ a   { color: inherit; }
 
 .wordmark {
   font-family: var(--f-display);
-  font-weight: 500;
+  font-weight: 400;
   font-size: clamp(1.5rem, 4.6vw, 2.6rem);
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -132,16 +141,14 @@ a   { color: inherit; }
 /* ---------------- shared section shell ---------------- */
 
 .section,
-.hero,
-.site-foot {
+.hero {
   max-width: var(--wrap);
   margin-inline: auto;
   padding-inline: var(--pad);
 }
 
 .hero        { padding-block: clamp(2rem, 5vw, 3rem) clamp(1.5rem, 4vw, 2.5rem); }
-.section     { padding-block: clamp(2rem, 6vw, 3rem); }
-.site-foot   { padding-block: clamp(2rem, 6vw, 3.5rem) clamp(3rem, 8vw, 4.5rem); }
+/* .section     { padding-block: clamp(2rem, 6vw, 3rem); } */
 
 /* Rules sit above and below each section heading, with air between. */
 .rule-heading {
@@ -165,7 +172,7 @@ a   { color: inherit; }
   font-family: var(--f-condensed);
   font-weight: 600;
   font-style: normal;
-  font-size: clamp(2.25rem, 9vw, 64px);
+  font-size: 0.6 rem;
   letter-spacing: .06em;
   line-height: .9em;
   text-transform: uppercase;
@@ -198,7 +205,7 @@ a   { color: inherit; }
   color: var(--grey);
   padding: clamp(1.1rem, 3.5vw, 1.6rem);
   font-family: var(--f-body);
-  font-weight: 300;
+  font-weight: 400;
   font-size: clamp(.92rem, 2.6vw, 1rem);
   line-height: 1.55;
   letter-spacing: .01em;
@@ -209,7 +216,7 @@ a   { color: inherit; }
 
 .hero-card-lead {
   color: var(--white);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.15em;
   margin-bottom: .7rem;
 }
@@ -221,7 +228,7 @@ a   { color: inherit; }
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    max-width: 700px;
+    max-width: 600px;
   }
 
   .hero-portrait {
@@ -342,6 +349,22 @@ a   { color: inherit; }
 
 /* ---------------- what I do ---------------- */
 
+/* Source row is 1 / 4 / 2 / 4 / 1 of 12: two 33.3% content columns with a
+   16.7% gutter and 8.3% either side. Columns stack at 1024px, per the
+   site's own custom CSS - a different breakpoint from the nav. */
+.offer-grid { display: block; }
+
+@media (min-width: 1025px) {
+  .offer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 16.666%;
+    align-items: start;
+    padding-inline: 8.333%;
+  }
+  .offer-grid .offer { padding-block: clamp(2rem, 4vw, 2.75rem); }
+}
+
 .offer {
   text-align: center;
   padding-block: clamp(2rem, 5vw, 3rem);
@@ -368,7 +391,7 @@ a   { color: inherit; }
 
 .btn {
   display: block;
-  width: min(100%, 520px);
+  width: min(100%, 400px);
   margin-inline: auto;
   padding: clamp(1rem, 3.2vw, 1.25rem) 1.25rem;
   background: var(--black);
@@ -391,16 +414,9 @@ a   { color: inherit; }
 
 .section-contact .rule-heading { display: grid; gap: .1em; }
 
-.contact-mail {
-  text-decoration: none;
-  overflow-wrap: anywhere;
-}
-.contact-mail:hover { text-decoration: underline; }
+/* The contact line is plain text, so it just needs to be able to break. */
+.section-contact .rule-heading { overflow-wrap: anywhere; }
 
-/* ---------------- footer ---------------- */
-
-.site-foot .social { margin-top: 0; }
-.handle--foot { margin-top: clamp(1.5rem, 4vw, 2rem); }
 
 /* ---------------- motion ---------------- */
 
