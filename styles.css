@@ -72,6 +72,8 @@ a   { color: inherit; }
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  max-width: var(--wrap);
+  margin-inline: auto;
   padding: clamp(.9rem, 3vw, 1.5rem) var(--pad);
   background: var(--white);
 }
