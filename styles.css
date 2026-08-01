@@ -353,6 +353,7 @@ a   { color: inherit; }
 .aside {
   margin: 0;
   text-align: center;
+padding-inline: var(--pad);	
   padding-bottom: clamp(1.5rem, 4vw, 2.25rem);
 }
 
@@ -361,11 +362,13 @@ a   { color: inherit; }
 /* Source row is 1 / 4 / 2 / 4 / 1 of 12: two 33.3% content columns with a
    16.7% gutter and 8.3% either side. Columns stack at 1024px, per the
    site's own custom CSS - a different breakpoint from the nav. */
-.offer-grid { display: block; }
+.offer-grid { display: block; padding-inline: var(--pad);}
 
 @media (min-width: 1025px) {
   .offer-grid {
     display: grid;
+    max-width: var(--wrap);
+    margin-inline: auto;
     grid-template-columns: 1fr 1fr;
     column-gap: 16.666%;
     align-items: start;
