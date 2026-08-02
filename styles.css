@@ -1,440 +1,440 @@
-/* ============================================================
-   liamkillen.com — clone of the live Squarespace design
-   White ground, black type, yellow frame.
+  /* ============================================================
+    liamkillen.com — clone of the live Squarespace design
+    White ground, black type, yellow frame.
 
-   Fonts, and the weights the source actually ships:
-     futura-pt                 400, 400i, 700, 700i        (body - Adobe Fonts)
-     Libre Franklin            400, 400i, 500, 700, 700i   (body fallback + headings)
-     Fjalla One                400 only                    (wordmark)
-     acumin-pro-extra-condensed 600                        (h2 - Adobe Fonts)
-   Jost stands in for futura-pt and Saira Extra Condensed for acumin. Do not
-   ask for a weight that is not in this list - the browser fakes it and the
-   result is mushy.
-   ============================================================ */
+    Fonts, and the weights the source actually ships:
+      futura-pt                 400, 400i, 700, 700i        (body - Adobe Fonts)
+      Libre Franklin            400, 400i, 500, 700, 700i   (body fallback + headings)
+      Fjalla One                400 only                    (wordmark)
+      acumin-pro-extra-condensed 600                        (h2 - Adobe Fonts)
+    Jost stands in for futura-pt and Saira Extra Condensed for acumin. Do not
+    ask for a weight that is not in this list - the browser fakes it and the
+    result is mushy.
+    ============================================================ */
 
-:root {
-  --black:    #000;
-  --white:    #fff;
-  --yellow:   #f5f000;   /* eyedropped approx — single point of change */
-  --hairline: #d8d8d8;
-  --grey:     #b8b8b8;   /* body copy inside the black hero card */
-  --surround: #2b2b2b;   /* backdrop either side of the page on wide screens */
-  --frame-w:  2px;
+  :root {
+    --black:    #000;
+    --white:    #fff;
+    --yellow:   #f5f000;   /* eyedropped approx — single point of change */
+    --hairline: #d8d8d8;
+    --grey:     #b8b8b8;   /* body copy inside the black hero card */
+    --surround: #2b2b2b;   /* backdrop either side of the page on wide screens */
+    --frame-w:  2px;
 
-  /* Real faces from the Squarespace source. futura-pt and
-     acumin-pro-extra-condensed are Adobe Fonts (licensed) — Jost and Saira
-     Extra Condensed stand in until a kit is set up; they are the closest
-     free geometric / extra-condensed equivalents. Naming the real family
-     first means a licensed kit starts working with no CSS change. */
-  --f-display:  "Fjalla One", "Arial Narrow", sans-serif;
-  --f-body:     "futura-pt", "Jost", "Libre Franklin", system-ui, sans-serif;
-  --f-condensed: "Saira Extra Condensed", "Oswald", "Arial Narrow", sans-serif;
+    /* Real faces from the Squarespace source. futura-pt and
+      acumin-pro-extra-condensed are Adobe Fonts (licensed) — Jost and Saira
+      Extra Condensed stand in until a kit is set up; they are the closest
+      free geometric / extra-condensed equivalents. Naming the real family
+      first means a licensed kit starts working with no CSS change. */
+    --f-display:  "Fjalla One", "Arial Narrow", sans-serif;
+    --f-body:     "futura-pt", "Jost", "Libre Franklin", system-ui, sans-serif;
+    --f-condensed: "Saira Extra Condensed", "Oswald", "Arial Narrow", sans-serif;
 
-  --wrap: 1200px;   /* inner content column (rules, sections) */
-  --page: 1400px;   /* outer framed column — the yellow border sits on this */
-  --pad:  clamp(1.25rem, 5vw, 2.5rem);
-}
+    --wrap: 1200px;   /* inner content column (rules, sections) */
+    --page: 1400px;   /* outer framed column — the yellow border sits on this */
+    --pad:  clamp(1.25rem, 5vw, 2.5rem);
+  }
 
-*, *::before, *::after { box-sizing: border-box; }
+  *, *::before, *::after { box-sizing: border-box; }
 
-/* Missing weights should fail visibly rather than being synthesised. */
-html, body { font-synthesis-weight: none; }
+  /* Missing weights should fail visibly rather than being synthesised. */
+  html, body { font-synthesis-weight: none; }
 
-html { -webkit-text-size-adjust: 100%; }
+  html { -webkit-text-size-adjust: 100%; }
 
-body {
-  margin: 0;
-  background: var(--surround);
-  color: var(--black);
-  font-family: var(--f-body);
-  font-weight: 400;
-  font-size: clamp(1.02rem, 2.6vw, 1.15rem);
-  line-height: 1.75;
-  letter-spacing: .045em;
-}
+  body {
+    margin: 0;
+    background: var(--surround);
+    color: var(--black);
+    font-family: var(--f-body);
+    font-weight: 400;
+    font-size: clamp(1.02rem, 2.6vw, 1.15rem);
+    line-height: 1.75;
+    letter-spacing: .045em;
+  }
 
-img { max-width: 100%; height: auto; display: block; }
-a   { color: inherit; }
+  img { max-width: 100%; height: auto; display: block; }
+  a   { color: inherit; }
 
-:focus-visible { outline: 2px solid var(--black); outline-offset: 3px; }
+  :focus-visible { outline: 2px solid var(--black); outline-offset: 3px; }
 
-.skip { position: absolute; left: -9999px; }
-.skip:focus {
-  left: 1rem; top: 1rem; z-index: 60;
-  background: var(--black); color: var(--white);
-  padding: .6rem 1rem; letter-spacing: .1em;
-}
+  .skip { position: absolute; left: -9999px; }
+  .skip:focus {
+    left: 1rem; top: 1rem; z-index: 60;
+    background: var(--black); color: var(--white);
+    padding: .6rem 1rem; letter-spacing: .1em;
+  }
 
-/* ---------------- masthead (spans the full framed column) ---------------- */
+  /* ---------------- masthead (spans the full framed column) ---------------- */
 
-.masthead {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: clamp(.9rem, 3vw, 1.5rem) var(--pad);
-  background: var(--white);
-}
-
-.wordmark {
-  font-family: var(--f-display);
-  font-weight: 400;
-  font-size: clamp(1.5rem, 4.6vw, 2.6rem);
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  text-decoration: none;
-  line-height: 1;
-}
-
-.nav-desktop { display: none; gap: clamp(2rem, 7vw, 6rem); }
-
-.nav-desktop a {
-  font-family: var(--f-body);
-  font-weight: 500;
-  font-size: 1rem;
-  letter-spacing: .22em;
-  text-transform: uppercase;
-  text-decoration: none;
-}
-.nav-desktop a:hover { opacity: .55; }
-
-.burger {
-  display: grid;
-  gap: 5px;
-  width: 30px;
-  padding: 4px 0;
-  background: none;
-  border: 0;
-  cursor: pointer;
-}
-.burger span {
-  display: block;
-  height: 2px;
-  background: var(--black);
-}
-
-.nav-mobile {
-  display: grid;
-  gap: .35rem;
-  padding: 0 var(--pad) 1.25rem;
-  background: var(--white);
-}
-.nav-mobile[hidden] { display: none; }
-.nav-mobile a {
-  font-weight: 500;
-  font-size: clamp(1.75rem, 9vw, 3rem);
-  line-height: 1;
-  letter-spacing: .22em;
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: .35rem 0;
-}
-
-@media (min-width: 801px) {
-  .nav-desktop { display: flex; }
-  .burger { display: none; }
-  .nav-mobile { display: none !important; }
-}
-
-/* ---------------- yellow frame ---------------- */
-
-/* The frame wraps the whole page — masthead included — and caps it at
-   --page. Past that width the body's --surround shows either side, which
-   is what the source does on large screens. */
-.page {
-  max-width: var(--page);
-  margin-inline: auto;
-  background: var(--white);
-  border: var(--frame-w) solid var(--yellow);
-}
-
-/* ---------------- shared section shell ---------------- */
-
-.section,
-.hero {
-  max-width: var(--wrap);
-  margin-inline: auto;
-  padding-inline: var(--pad);
-}
-
-.hero        { padding-block: clamp(2rem, 5vw, 3rem) clamp(1.5rem, 4vw, 2.5rem); }
-/* .section   { padding-block: clamp(2rem, 6vw, 3rem); } */
-
-/* Rules sit above and below each section heading, with air between. */
-.rule-heading {
-  margin: 0;
-  padding-block: clamp(1.75rem, 5vw, 2.75rem);
-  border-top: 1px solid var(--hairline);
-  border-bottom: 1px solid var(--hairline);
-  font-family: var(--f-body);
-  font-weight: 700;
-  font-size: clamp(1.05rem, 3.6vw, 1.3rem);
-  letter-spacing: .1em;
-  line-height: 1.4;
-  text-transform: uppercase;
-  text-align: center;
-}
-
-/* h2 spec lifted verbatim from the site's custom CSS:
-   acumin-pro-extra-condensed 600 / 64px / .06em / .9em / uppercase.
-   Size made fluid so it stops clipping on narrow screens. */
-.rule-heading--display {
-  font-family: var(--f-condensed);
-  font-weight: 600;
-  font-style: normal;
-  letter-spacing: .06em;
-  line-height: .9em;
-  text-transform: uppercase;
-}
-
-/* ---------------- hero ---------------- */
-
-.hero-stack {
-  position: relative;
-  max-width: 620px;
-  margin-inline: auto;
-}
-
-.hero-portrait {
-  width: 84%;
-  height: auto;
-  margin-inline: auto;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 3px solid var(--black);
-}
-
-.hero-card {
-  position: relative;
-  z-index: 2;
-  margin: -22% 0 0 auto;
-  width: min(62%, 340px);
-  background: var(--black);
-  color: var(--grey);
-  padding: clamp(1.1rem, 3.5vw, 1.6rem);
-  font-family: var(--f-body);
-  font-weight: 400;
-  font-size: clamp(.92rem, 2.6vw, 1rem);
-  line-height: 1.55;
-  letter-spacing: .01em;
-}
-
-.hero-card p { margin: 0 0 .9rem; }
-.hero-card p:last-child { margin-bottom: 0; }
-
-.hero-card-lead {
-  color: var(--white);
-  font-weight: 700;
-  font-size: 1.15em;
-  margin-bottom: .7rem;
-}
-
-/* Desktop: portrait and card sit in a row, card overlapping the circle.
-   Mobile keeps the stacked collage layout above. */
-@media (min-width: 801px) {
-  .hero-stack {
+  .masthead {
     display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    max-width: min(820px, 90%);
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: clamp(.9rem, 3vw, 1.5rem) var(--pad);
+    background: var(--white);
+  }
+
+  .wordmark {
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-size: clamp(1.5rem, 4.6vw, 2.6rem);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    line-height: 1;
+  }
+
+  .nav-desktop { display: none; gap: clamp(2rem, 7vw, 6rem); }
+
+  .nav-desktop a {
+    font-family: var(--f-body);
+    font-weight: 500;
+    font-size: 1rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .nav-desktop a:hover { opacity: .55; }
+
+  .burger {
+    display: grid;
+    gap: 5px;
+    width: 30px;
+    padding: 4px 0;
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+  .burger span {
+    display: block;
+    height: 2px;
+    background: var(--black);
+  }
+
+  .nav-mobile {
+    display: grid;
+    gap: .35rem;
+    padding: 0 var(--pad) 1.25rem;
+    background: var(--white);
+  }
+  .nav-mobile[hidden] { display: none; }
+  .nav-mobile a {
+    font-weight: 500;
+    font-size: clamp(1.75rem, 9vw, 3rem);
+    line-height: 1;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: .35rem 0;
+  }
+
+  @media (min-width: 801px) {
+    .nav-desktop { display: flex; }
+    .burger { display: none; }
+    .nav-mobile { display: none !important; }
+  }
+
+  /* ---------------- yellow frame ---------------- */
+
+  /* The frame wraps the whole page — masthead included — and caps it at
+    --page. Past that width the body's --surround shows either side, which
+    is what the source does on large screens. */
+  .page {
+    max-width: var(--page);
+    margin-inline: auto;
+    background: var(--white);
+    border: var(--frame-w) solid var(--yellow);
+  }
+
+  /* ---------------- shared section shell ---------------- */
+
+  .section,
+  .hero {
+    max-width: var(--wrap);
+    margin-inline: auto;
+    padding-inline: var(--pad);
+  }
+
+  .hero        { padding-block: clamp(2rem, 5vw, 3rem) clamp(1.5rem, 4vw, 2.5rem); }
+  /* .section   { padding-block: clamp(2rem, 6vw, 3rem); } */
+
+  /* Rules sit above and below each section heading, with air between. */
+  .rule-heading {
+    margin: 0;
+    padding-block: clamp(1.75rem, 5vw, 2.75rem);
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+    font-family: var(--f-body);
+    font-weight: 700;
+    font-size: clamp(1.05rem, 3.6vw, 1.3rem);
+    letter-spacing: .1em;
+    line-height: 1.4;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  /* h2 spec lifted verbatim from the site's custom CSS:
+    acumin-pro-extra-condensed 600 / 64px / .06em / .9em / uppercase.
+    Size made fluid so it stops clipping on narrow screens. */
+  .rule-heading--display {
+    font-family: var(--f-condensed);
+    font-weight: 600;
+    font-style: normal;
+    letter-spacing: .06em;
+    line-height: .9em;
+    text-transform: uppercase;
+  }
+
+  /* ---------------- hero ---------------- */
+
+  .hero-stack {
+    position: relative;
+    max-width: 620px;
+    margin-inline: auto;
   }
 
   .hero-portrait {
-    flex: 0 0 56%;
-    width: 56%;
-    margin: 0;
+    width: 84%;
+    height: auto;
+    margin-inline: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--black);
   }
 
   .hero-card {
-    flex: 0 0 46%;
-    width: 46%;
-    margin: 7% 0 0 -3%;
-    padding: 1.75rem;
+    position: relative;
+    z-index: 2;
+    margin: -22% 0 0 auto;
+    width: min(62%, 340px);
+    background: var(--black);
+    color: var(--grey);
+    padding: clamp(1.1rem, 3.5vw, 1.6rem);
+    font-family: var(--f-body);
+    font-weight: 400;
+    font-size: clamp(.92rem, 2.6vw, 1rem);
+    line-height: 1.55;
+    letter-spacing: .01em;
   }
-}
 
-/* ---------------- social row ---------------- */
+  .hero-card p { margin: 0 0 .9rem; }
+  .hero-card p:last-child { margin-bottom: 0; }
 
-.social {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
-  margin: clamp(2.5rem, 7vw, 3.5rem) 0 0;
-  padding: 0;
-  list-style: none;
-}
+  .hero-card-lead {
+    color: var(--white);
+    font-weight: 700;
+    font-size: 1.15em;
+    margin-bottom: .7rem;
+  }
 
-.social a {
-  display: block;
-  width: 42px;
-}
-.social svg { width: 100%; height: auto; fill: var(--black); display: block; }
-.social a:hover { opacity: .6; }
+  /* Desktop: portrait and card sit in a row, card overlapping the circle.
+    Mobile keeps the stacked collage layout above. */
+  @media (min-width: 801px) {
+    .hero-stack {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      max-width: min(820px, 90%);
+    }
 
-.handle {
-  margin: clamp(1.75rem, 5vw, 2.5rem) 0 0;
-  font-weight: 700;
-  font-size: clamp(1.05rem, 3.6vw, 1.25rem);
-  letter-spacing: .14em;
-  text-align: center;
-}
+    .hero-portrait {
+      flex: 0 0 56%;
+      width: 56%;
+      margin: 0;
+    }
 
-/* ---------------- logo slideshow ---------------- */
-/* Source used a Squarespace gallery block: Slideshow design, Fade
-   transition, 75% container width, arrows revealed on hover. */
+    .hero-card {
+      flex: 0 0 46%;
+      width: 46%;
+      margin: 7% 0 0 -3%;
+      padding: 1.75rem;
+    }
+  }
 
-.slideshow {
-  position: relative;
-  width: 75%;
-  max-width: 300px;
-  margin: clamp(1.75rem, 5vw, 2.5rem) auto;
-}
+  /* ---------------- social row ---------------- */
 
-.slideshow-viewport {
-  position: relative;
-  aspect-ratio: 1 / 1;
-  background: var(--white);
-}
+  .social {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(0.75rem, 5.5vw, 40px);
+    margin: clamp(2.5rem, 7vw, 3.5rem) 0 0;
+    padding: 0;
+    list-style: none;
+  }
 
-.slideshow-viewport li {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity .1s linear;
-  pointer-events: none;
-}
-.slideshow-viewport li.is-current {
-  opacity: 1;
-  pointer-events: auto;
-}
+  .social a {
+    display: block;
+    width: 42px;
+  }
+  .social svg { width: 100%; height: auto; fill: var(--black); display: block; }
+  .social a:hover { opacity: .6; }
 
-.slideshow-viewport {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
+  .handle {
+    margin: clamp(1.75rem, 5vw, 2.5rem) 0 0;
+    font-weight: 700;
+    font-size: clamp(1.05rem, 3.6vw, 1.25rem);
+    letter-spacing: .14em;
+    text-align: center;
+  }
 
-.slideshow-viewport img {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-}
+  /* ---------------- logo slideshow ---------------- */
+  /* Source used a Squarespace gallery block: Slideshow design, Fade
+    transition, 75% container width, arrows revealed on hover. */
 
-.slide-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 3;
-  display: none;
-  width: 34px;
-  height: 34px;
-  padding: 0;
-  background: var(--white);
-  border: 1px solid var(--hairline);
-  color: var(--black);
-  font-size: 1.1rem;
-  line-height: 1;
-  cursor: pointer;
-}
-.slide-nav--prev { left: -17px; }
-.slide-nav--next { right: -17px; }
+  .slideshow {
+    position: relative;
+    width: 75%;
+    max-width: 300px;
+    margin: clamp(1.75rem, 5vw, 2.5rem) auto;
+  }
 
-.slideshow:hover .slide-nav,
-.slideshow:focus-within .slide-nav { display: block; }
+  .slideshow-viewport {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: var(--white);
+  }
 
-.aside {
-  margin: 0;
-  text-align: center;
-padding-inline: var(--pad);	
-  padding-bottom: clamp(1.5rem, 4vw, 2.25rem);
-}
+  .slideshow-viewport li {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity .1s linear;
+    pointer-events: none;
+  }
+  .slideshow-viewport li.is-current {
+    opacity: 1;
+    pointer-events: auto;
+  }
 
-/* ---------------- what I do ---------------- */
+  .slideshow-viewport {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
 
-/* Source row is 1 / 4 / 2 / 4 / 1 of 12: two 33.3% content columns with a
-   16.7% gutter and 8.3% either side. Columns stack at 1024px, per the
-   site's own custom CSS - a different breakpoint from the nav. */
-.offer-grid { display: block; padding-inline: var(--pad);}
+  .slideshow-viewport img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
 
-@media (min-width: 1025px) {
-  .offer-grid {
-    display: grid;
-    max-width: var(--wrap);
+  .slide-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+    display: none;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    background: var(--white);
+    border: 1px solid var(--hairline);
+    color: var(--black);
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .slide-nav--prev { left: -17px; }
+  .slide-nav--next { right: -17px; }
+
+  .slideshow:hover .slide-nav,
+  .slideshow:focus-within .slide-nav { display: block; }
+
+  .aside {
+    margin: 0;
+    text-align: center;
+  padding-inline: var(--pad);	
+    padding-bottom: clamp(1.5rem, 4vw, 2.25rem);
+  }
+
+  /* ---------------- what I do ---------------- */
+
+  /* Source row is 1 / 4 / 2 / 4 / 1 of 12: two 33.3% content columns with a
+    16.7% gutter and 8.3% either side. Columns stack at 1024px, per the
+    site's own custom CSS - a different breakpoint from the nav. */
+  .offer-grid { display: block; padding-inline: var(--pad);}
+
+  @media (min-width: 1025px) {
+    .offer-grid {
+      display: grid;
+      max-width: var(--wrap);
+      margin-inline: auto;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 16.666%;
+      align-items: start;
+      padding-inline: 8.333%;
+    }
+    .offer-grid .offer { padding-block: clamp(2rem, 4vw, 2.75rem); }
+  }
+
+  .offer {
+    text-align: center;
+    padding-block: clamp(2rem, 5vw, 3rem);
+  }
+
+  .offer h3 {
+    margin: 0 0 clamp(1.5rem, 4vw, 2rem);
+    font-family: var(--f-body);
+    font-weight: 700;
+    font-size: clamp(1.15rem, 4vw, 1.4rem);
+    letter-spacing: .1em;
+  }
+
+  .offer-art {
+    width: min(60%, 260px);
+    height: auto;
+    margin: 0 auto clamp(1.5rem, 4vw, 2rem);
+  }
+
+  .offer p {
+    margin: 0 auto clamp(1.5rem, 4vw, 2rem);
+    max-width: 40ch;
+  }
+
+  .btn {
+    display: block;
+    width: min(100%, 400px);
     margin-inline: auto;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 16.666%;
-    align-items: start;
-    padding-inline: 8.333%;
+    padding: clamp(1rem, 3.2vw, 1.25rem) 1.25rem;
+    background: var(--black);
+    color: var(--white);
+    border-radius: 3px;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, .18);
+    font-weight: 500;
+    font-size: clamp(.95rem, 3.2vw, 1.05rem);
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+    transition: opacity .18s ease;
   }
-  .offer-grid .offer { padding-block: clamp(2rem, 4vw, 2.75rem); }
-}
+  .btn:hover { opacity: .82; }
 
-.offer {
-  text-align: center;
-  padding-block: clamp(2rem, 5vw, 3rem);
-}
+  .btn-emoji { letter-spacing: normal; margin-right: .4em; }
 
-.offer h3 {
-  margin: 0 0 clamp(1.5rem, 4vw, 2rem);
-  font-family: var(--f-body);
-  font-weight: 700;
-  font-size: clamp(1.15rem, 4vw, 1.4rem);
-  letter-spacing: .1em;
-}
+  /* ---------------- contact ---------------- */
 
-.offer-art {
-  width: min(60%, 260px);
-  height: auto;
-  margin: 0 auto clamp(1.5rem, 4vw, 2rem);
-}
+  .section-contact .rule-heading { display: grid; gap: .1em; }
 
-.offer p {
-  margin: 0 auto clamp(1.5rem, 4vw, 2rem);
-  max-width: 40ch;
-}
+  /* The contact line is plain text, so it just needs to be able to break. */
+  .section-contact .rule-heading { overflow-wrap: anywhere; }
 
-.btn {
-  display: block;
-  width: min(100%, 400px);
-  margin-inline: auto;
-  padding: clamp(1rem, 3.2vw, 1.25rem) 1.25rem;
-  background: var(--black);
-  color: var(--white);
-  border-radius: 3px;
-  box-shadow: 4px 4px 0 rgba(0, 0, 0, .18);
-  font-weight: 500;
-  font-size: clamp(.95rem, 3.2vw, 1.05rem);
-  letter-spacing: .3em;
-  text-transform: uppercase;
-  text-align: center;
-  text-decoration: none;
-  transition: opacity .18s ease;
-}
-.btn:hover { opacity: .82; }
-
-.btn-emoji { letter-spacing: normal; margin-right: .4em; }
-
-/* ---------------- contact ---------------- */
-
-.section-contact .rule-heading { display: grid; gap: .1em; }
-
-/* The contact line is plain text, so it just needs to be able to break. */
-.section-contact .rule-heading { overflow-wrap: anywhere; }
-
-.section-contact { padding-block-end: clamp(2rem, 5vw, 3rem); }
+  .section-contact { padding-block-end: clamp(2rem, 5vw, 3rem); }
 
 
-/* ---------------- motion ---------------- */
+  /* ---------------- motion ---------------- */
 
-@media (prefers-reduced-motion: reduce) {
-  .slideshow-viewport li { transition: none; }
-  * { transition: none !important; }
-}
+  @media (prefers-reduced-motion: reduce) {
+    .slideshow-viewport li { transition: none; }
+    * { transition: none !important; }
+  }
