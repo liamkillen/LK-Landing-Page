@@ -230,6 +230,15 @@
     margin-bottom: .7rem;
   }
 
+  /* Mobile only: keep the introduction below the portrait so it never covers the face. */
+  @media (max-width: 800px) {
+    .hero-card {
+      margin: 1rem auto 0;
+      width: 100%;
+      max-width: 420px;
+    }
+  }
+
   /* Desktop: portrait and card sit in a row, card overlapping the circle.
     Mobile keeps the stacked collage layout above. */
   @media (min-width: 801px) {
