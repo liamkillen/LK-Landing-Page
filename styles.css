@@ -371,13 +371,16 @@
       margin-inline: auto;
       grid-template-columns: 1fr 1fr;
       column-gap: 16.666%;
-      align-items: start;
+      align-items: stretch;
       padding-inline: 8.333%;
     }
     .offer-grid .offer { padding-block: clamp(2rem, 4vw, 2.75rem); }
   }
 
   .offer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     padding-block: clamp(2rem, 5vw, 3rem);
   }
@@ -418,6 +421,7 @@
     text-decoration: none;
     transition: opacity .18s ease;
   }
+  .offer .btn { margin-top: auto; }
   .btn:hover { opacity: .82; }
 
   .btn-emoji { letter-spacing: normal; margin-right: .4em; }
